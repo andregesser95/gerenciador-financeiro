@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { BalanceCard } from './components/balance-card/balance-card';
+import { Balance } from './components/balance/balance';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.html',
   styleUrl: './home.scss',
-  imports: [BalanceCard],
+  imports: [Balance],
 })
 export class Home {}
