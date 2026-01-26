@@ -1,6 +1,12 @@
 import { Component, computed, input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 
+type CardType = 'income' | 'outcome' | 'balance';
+enum ValueCssClass {
+  income = 'income',
+  outcome = 'outcome',
+}
+
 @Component({
   selector: 'app-balance-card',
   templateUrl: './balance-card.html',
@@ -8,19 +14,19 @@ import { MatCardModule } from '@angular/material/card';
   imports: [MatCardModule],
 })
 export class BalanceCard {
-  type = input.required<'income' | 'outcome' | 'balance'>();
+  type = input.required<CardType>();
   label = input.required<string>();
   value = input.required<number>();
 
-  cssClass = computed(() => {
+  cssClass = computed<ValueCssClass>(() => {
     if (this.type() === 'income') {
-      return 'income';
+      return ValueCssClass.income;
     }
 
     if (this.type() === 'outcome') {
-      return 'outcome';
+      return ValueCssClass.outcome;
     }
 
-    return this.value() > 0 ? 'income' : 'outcome';
+    return this.value() > 0 ? ValueCssClass.income : ValueCssClass.outcome;
   });
 }
