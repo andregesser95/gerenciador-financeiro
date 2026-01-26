@@ -1,4 +1,5 @@
 import { Component, signal } from '@angular/core';
+import { Transaction } from '../../shared/interfaces/transaction.interface';
 import { Balance } from './components/balance/balance';
 import { TransactionItem } from './components/transaction-item/transaction-item';
 
@@ -9,9 +10,9 @@ import { TransactionItem } from './components/transaction-item/transaction-item'
   imports: [Balance, TransactionItem],
 })
 export class Home {
-  transactions = signal([
-    { value: 200, type: 'income' },
-    { value: 100, type: 'outcome' },
-    { value: 100, type: 'outcome' },
+  transactions = signal<Transaction[]>([
+    { title: 'Salário', value: 200, type: 'income' },
+    { title: 'Conta de Luz', value: 100, type: 'outcome' },
+    { title: 'Conta de Água', value: 100, type: 'outcome' },
   ]);
 }
