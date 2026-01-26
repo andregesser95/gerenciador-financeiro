@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { Balance } from './components/balance/balance';
 
 @Component({
@@ -7,4 +7,10 @@ import { Balance } from './components/balance/balance';
   styleUrl: './home.scss',
   imports: [Balance],
 })
-export class Home {}
+export class Home {
+  transactions = signal([
+    { value: 200, type: 'income' },
+    { value: 100, type: 'outcome' },
+    { value: 100, type: 'outcome' },
+  ]);
+}
