@@ -11,9 +11,5 @@ import { TransactionItem } from './components/transaction-item/transaction-item'
   imports: [Balance, TransactionItem, NoTransactions],
 })
 export class Home {
-  transactions = signal<Transaction[]>([
-    // { title: 'Salário', value: 200, type: TransactionType.INCOME },
-    // { title: 'Conta de Luz', value: 100, type: TransactionType.OUTCOME },
-    // { title: 'Conta de Água', value: 100, type: TransactionType.OUTCOME },
-  ]);
+  transactions = signal<Transaction[]>([]);
 }
