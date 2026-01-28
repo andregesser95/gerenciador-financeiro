@@ -4,6 +4,7 @@ import { Transaction } from '../../shared/transaction/interfaces/transaction.int
 import { Balance } from './components/balance/balance';
 import { NoTransactions } from './components/no-transactions/no-transactions';
 import { TransactionItem } from './components/transaction-item/transaction-item';
+import { TransactionsService } from '../../shared/transaction/services/transactions';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +13,7 @@ import { TransactionItem } from './components/transaction-item/transaction-item'
   imports: [Balance, TransactionItem, NoTransactions],
 })
 export class Home implements OnInit {
-  private httClient = inject(HttpClient);
+  private transactionsService = inject(TransactionsService);
 
   transactions = signal<Transaction[]>([]);
 
@@ -21,10 +22,10 @@ export class Home implements OnInit {
   }
 
   private getTransactions() {
-    this.httClient
-      .get<Transaction[]>('http://localhost:3000/transactions')
-      .subscribe((transactions) => {
+    this.transactionsService.getAll().subscribe({
+      next: (transactions) => {
         this.transactions.set(transactions);
-      });
+      },
+    });
   }
 }
