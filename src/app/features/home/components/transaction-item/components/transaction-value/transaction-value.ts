@@ -11,10 +11,10 @@ const CssClasses = {
   selector: 'app-transaction-value',
   styleUrl: './transaction-value.scss',
   imports: [],
+  template: `{{ transaction().value }}`,
   host: {
     '[class]': 'cssClass()',
   },
-  template: `{{ transaction().value }}`,
 })
 export class TransactionValue {
   transaction = input.required<Transaction>();
