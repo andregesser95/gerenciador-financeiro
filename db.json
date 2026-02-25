@@ -3,14 +3,14 @@
     {
       "title": "Salário",
       "type": "income",
-      "value": 1500,
+      "value": 3500,
       "id": 1
     },
     {
-      "id": 2,
       "title": "Conta de Luz",
-      "value": 100,
-      "type": "outcome"
+      "type": "outcome",
+      "value": 450.25,
+      "id": 2
     },
     {
       "id": 3,
