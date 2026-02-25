@@ -1,5 +1,6 @@
 import { Home } from './home';
-import { CreateComponent } from './pages/create/create.component';
+import { CreateOrEditComponent } from './pages/create-or-edit/create-or-edit.component';
+import { getTransactionByIdResolver } from './pages/create-or-edit/resolver/get-transaction-by-id-resolver';
 
 export default [
   {
@@ -8,6 +9,13 @@ export default [
   },
   {
     path: 'create',
-    component: CreateComponent,
+    component: CreateOrEditComponent,
+  },
+  {
+    path: 'edit/:id',
+    component: CreateOrEditComponent,
+    resolve: {
+      transaction: getTransactionByIdResolver,
+    },
   },
 ];

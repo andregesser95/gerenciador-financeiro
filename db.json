@@ -1,22 +1,28 @@
 {
   "transactions": [
     {
-      "id": 1,
       "title": "Salário",
-      "value": 200,
-      "type": 0
+      "type": "income",
+      "value": 1500,
+      "id": 1
     },
     {
       "id": 2,
       "title": "Conta de Luz",
       "value": 100,
-      "type": 1
+      "type": "outcome"
     },
     {
       "id": 3,
       "title": "Conta de Água",
       "value": 100,
-      "type": 1
+      "type": "outcome"
+    },
+    {
+      "title": "Salário do mês",
+      "type": "income",
+      "value": 8500,
+      "id": 4
     }
   ]
 }
