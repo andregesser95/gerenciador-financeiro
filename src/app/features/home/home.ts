@@ -1,6 +1,7 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { Router, RouterLink } from '@angular/router';
+import { FeedbackService } from '../../shared/feedback/services/feedback.service';
 import { Transaction } from '../../shared/transaction/interfaces/transaction.interface';
 import { TransactionsService } from '../../shared/transaction/services/transactions.service';
 import { Balance } from './components/balance/balance';
@@ -15,6 +16,7 @@ import { TransactionItem } from './components/transaction-item/transaction-item'
 })
 export class Home implements OnInit {
   private transactionsService = inject(TransactionsService);
+  private feedbackService = inject(FeedbackService);
   private router = inject(Router);
 
   transactions = signal<Transaction[]>([]);
@@ -28,6 +30,15 @@ export class Home implements OnInit {
   }
 
   remove(transaction: Transaction) {
+    this.transactionsService.delete(transaction.id!).subscribe({
+      next: () => {
+        this.removeTransactionFromArray(transaction);
+        this.feedbackService.success('Transação removida com sucesso!');
+      },
+    });
+  }
+
+  private removeTransactionFromArray(transaction: Transaction) {
     this.transactions.update((transactions) =>
       transactions.filter((item) => item.id !== transaction.id),
     );
