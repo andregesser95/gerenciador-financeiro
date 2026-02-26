@@ -1,6 +1,7 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { Router, RouterLink } from '@angular/router';
+import { ConfirmationDialogService } from '../../shared/dialog/confirmation/services/confirmation-dialog.service';
 import { FeedbackService } from '../../shared/feedback/services/feedback.service';
 import { Transaction } from '../../shared/transaction/interfaces/transaction.interface';
 import { TransactionsService } from '../../shared/transaction/services/transactions.service';
@@ -18,6 +19,7 @@ export class Home implements OnInit {
   private transactionsService = inject(TransactionsService);
   private feedbackService = inject(FeedbackService);
   private router = inject(Router);
+  private confirmationService = inject(ConfirmationDialogService);
 
   transactions = signal<Transaction[]>([]);
 
@@ -30,12 +32,23 @@ export class Home implements OnInit {
   }
 
   remove(transaction: Transaction) {
-    this.transactionsService.delete(transaction.id!).subscribe({
-      next: () => {
-        this.removeTransactionFromArray(transaction);
-        this.feedbackService.success('Transação removida com sucesso!');
-      },
-    });
+    this.confirmationService
+      .open({
+        title: 'Deletar transação',
+        message: 'Tem certeza que deseja remover esta transação?',
+        yesBtnText: 'Sim',
+        noBtnText: 'Não',
+      })
+      .subscribe({
+        next: () => {
+          this.transactionsService.delete(transaction.id!).subscribe({
+            next: () => {
+              this.removeTransactionFromArray(transaction);
+              this.feedbackService.success('Transação removida com sucesso!');
+            },
+          });
+        },
+      });
   }
 
   private removeTransactionFromArray(transaction: Transaction) {
