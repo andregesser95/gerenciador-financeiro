@@ -36,8 +36,6 @@ export class Home implements OnInit {
       .open({
         title: 'Deletar transação',
         message: 'Tem certeza que deseja remover esta transação?',
-        yesBtnText: 'Sim',
-        noBtnText: 'Não',
       })
       .subscribe({
         next: () => {

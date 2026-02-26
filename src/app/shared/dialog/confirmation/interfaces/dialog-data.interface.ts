@@ -1,6 +1,6 @@
 export interface DialogData {
   title: string;
   message: string;
-  yesBtnText: string;
-  noBtnText: string;
+  yesBtnText?: string;
+  noBtnText?: string;
 }
